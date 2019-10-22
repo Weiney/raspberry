@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block head %}
+    <title>上传成功</title>
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1 class="mt-5">图片上传成功 <span class="badge badge-secondary badge-pill">Succeed</span></h1>
+        <hr/>
+        <figure class="figure">
+            <img src="{{ url_for("web.upload+get_upload", filetype=filetype, filename=filename) }}" class="figure-img img-fluid rounded" alt="...">
+            <figcaption class="figure-caption text-center">{{ filename }}</figcaption>
+        </figure>
+    </div>
+{% endblock %}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Little Poem</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename="css/style.css") }}">
+    {{ bootstrap.load_css() }}
+</head>
+
+<body>
+<div class="head">
+    <h1 style="line-height: 60px;text-indent: 40px; color: white;">Hello Flask</h1>
+</div>
+<div class="content">
+    <img src="{{ url_for("static", filename="img/photo.png") }}"
+         style="border: 2px solid #328DA0; border-radius: 50px; width: 72px; height: 72px; margin: 0 40px 0 50px;">
+    <h1 id="name"
+        style="display: inline-block; font-size: 42px; line-height: 60px; vertical-align: bottom;font-family: sans-serif;">
+        Weieny&nbsp;&nbsp;Boy</h1>
+    <hr style="margin-top: 20px; width: 80%; margin-left: 30px; margin-bottom: 30px;"/>
+    <p>Jelly Weiney,</p>
+    <p>Just a funny boy,</p>
+    <p>Bring happy to everybody.</p>
+    <p>Such a cute baby,</p>
+    <p>Like a little puppy.</p>
+    <p>Oh~~~,Weiney.</p>
+    <p>You from heaven maybe,</p>
+    <p>You have the purest smile like sunny.</p>
+    <!-- <hr style="margin-top: 20px; width: 60%; margin: 30px auto;" /> -->
+    <p style="font-size: 16px; text-indent: 360px; margin-top: 20px;">2019年 10月12日</p>
+</div>
+{{ bootstrap.load_js() }}
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask 文件上传</title>
+    {{ bootstrap.load_css() }}
+</head>
+<body>
+    {{ bootstrap.load_js() }}
+    <div class="jumbotron-fluid ">
+        <div class="container bg-info" style="border-radius: 0 0 6px 6px">
+            <h2 class="text-light" style="line-height: 72px;">Flask 文件上传</h2>
+        </div>
+
+        <div class="container">
+            {% from "bootstrap/form.html" import render_form %}
+            {{ render_form(form) }}
+        </div>
+    </div>
+
+
+</body>
+</html>

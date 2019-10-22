@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.head {
+    width: 1024px;
+    height: 60px;
+    margin: 0 auto;
+    border-radius: 0 0 4px 4px;
+    background: #33A4CF;
+}
+
+.content {
+    width: 960px;
+    height: 400px;
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+p {
+    font-size: 24px;
+    text-indent: 172px;
+    line-height: 48px;
+}

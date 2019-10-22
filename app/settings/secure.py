@@ -1,0 +1,2 @@
+REDIS_URL = "redis://:123456@localhost:6379/0"
+SECRET_KEY = "zTm1Vix7UZZdJIjAqaYJ6cPzFBvBXWLx"

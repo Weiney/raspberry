@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en" class="h-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户登录</title>
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@beta/dist/js.cookie.min.js"></script>
+</head>
+<body class="d-flex align-items-center justify-content-center h-100" style="background:#ebebeb;">
+    <div class="login text-center" style="width: 280px; height: 480px;">
+        <img class="rounded mt-2" src="{{ url_for("static", filename="img/photo.png") }}"
+             style="width: 72px; height: 72px;" alt="">
+        <h3 class="mt-4">Please Sign IN</h3>
+        <form class="mt-4" action="" method="post">
+            {{ form.csrf_token() }}
+            <div class="form-group">
+                <label for="username" class="sr-only">请输入账号</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="请输入账号"
+                       style="border-bottom-left-radius: unset; border-bottom-right-radius: unset;" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password" class="sr-only">请输入密码</label>
+                <input type="password" id="username" name="password" class="form-control" placeholder="请输入密码"
+                       style="border-radius: unset;" required>
+            </div>
+
+            <div class="input-group">
+                <label for="verification" class="sr-only">请输入验证码</label>
+                <input type="text" id="verification" name="verification" class="form-control" placeholder="请输入验证码" required>
+                <div class="input-group-append">
+                    <div class="input-group-text">{{ code }}</div>
+                </div>
+            </div>
+
+            <input type="submit" id="submit" class="btn btn-block btn-primary mt-4" value="登录">
+        </form>
+    </div>
+    <script>
+        $("#submit").on("click", function () {
+            return true;
+        });
+    </script>
+</body>
+</html>
