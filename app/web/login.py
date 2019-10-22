@@ -1,4 +1,4 @@
-from flask import render_template, session
+from flask import render_template, session, current_app
 
 from app import redis_store
 from app.forms.login import LoginForm
@@ -25,5 +25,5 @@ def login():
                 return "验证码错误"
 
     code = randon_code()
-    redis_store.set(session.get("csrf_token"), code.lower(), ex=300)
+    redis_store.set(session.get("csrf_token"), code.lower(), ex=current_app.config.get("VERIFICATION_TIMEOUT", 300))
     return render_template("login/login.html", form=form, code=code)
