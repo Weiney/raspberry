@@ -1,10 +1,12 @@
 from flask import Flask
 from flask_bootstrap import Bootstrap
+from flask_login import LoginManager
 from flask_redis import FlaskRedis
 
 from app.models.base import db
 
 redis_store = FlaskRedis()
+login_manager = LoginManager()
 
 
 def create_app():
@@ -26,6 +28,8 @@ def register_extension(app):
     Bootstrap(app)
     redis_store.init_app(app, decode_responses=True)
     db.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = "web.login+login"
 
 
 def register_blueprint(app):
