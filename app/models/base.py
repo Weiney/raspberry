@@ -1,5 +1,6 @@
-from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 from contextlib import contextmanager
+
+from flask_sqlalchemy import SQLAlchemy as _SQLAlchemy
 
 
 class SQLAlchemy(_SQLAlchemy):
@@ -14,5 +15,5 @@ class SQLAlchemy(_SQLAlchemy):
 
 db = SQLAlchemy()
 
-class Base(db.Model):
-    pass
+# class Base(db.Model):
+#     pass
