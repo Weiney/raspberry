@@ -1,4 +1,4 @@
-from flask import render_template, session, current_app, redirect, url_for, request
+from flask import render_template, session, current_app, redirect, url_for, request, flash
 from flask_login import login_user, login_required, current_user
 
 from app import redis_store
@@ -18,17 +18,18 @@ def login():
     form = LoginForm()
 
     if form.validate_on_submit():
+        csrf_token = session.get("csrf_token")
+        server_code = redis_store.get(csrf_token)
+        if server_code is None:
+            flash("验证码失效,请从新登录")
+            return redirect(url_for("web.login+login"))
+        if server_code != form.verification.data.lower():
+            flash("验证码错误")
+            return redirect(url_for("web.login+login"))
+
         user = User.query.filter_by(username=form.username.data).first()
         if user:
-            csrf_token = session.get("csrf_token")
-            server_code = redis_store.get(csrf_token)
-            if server_code is None:
-                return "验证码失效,请刷新重试"
-            if server_code != form.verification.data.lower():
-                return "验证码错误"
-
             redis_store.delete(csrf_token)
-
             if user.check_password(form.password.data):
                 login_user(user)
                 next = request.args.get("next")
@@ -36,9 +37,12 @@ def login():
                     return redirect(next)
                 return redirect(url_for("web.login+login_success"))
             else:
-                return "密码错误"
+                flash("密码错误")
+                return redirect(url_for("web.login+login"))
         else:
-            return "账号不存在"
+            flash("账号不存在")
+            return redirect(url_for("web.login+login"))
+
 
     code = randon_code()
     redis_store.set(session.get("csrf_token"), code.lower(), ex=current_app.config.get("VERIFICATION_TIMEOUT", 300))
