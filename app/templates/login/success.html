@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录成功</title>
+    {{ bootstrap.load_css() }}
+    {{ bootstrap.load_js() }}
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-3">登录成功</h1>
+        <hr/>
+        <h4>用户名:{{ current_user.username }} <span
+                class="badge badge-success">{{ "VIP: " + current_user.limit_level|string }}</span></h4>
+        <hr/>
+        <button class="btn btn-primary">级别权限0</button>
+        <button class="btn btn-secondary">级别权限1</button>
+        <button class="btn btn-light">级别权限2</button>
+        <button class="btn btn-dark">级别权限3</button>
+        <button class="btn btn-success">级别权限4</button>
+        <button class="btn btn-warning">级别权限5</button>
+        <button class="btn btn-dark">级别权限6</button>
+    </div>
+</body>
+</html>

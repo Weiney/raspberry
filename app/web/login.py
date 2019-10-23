@@ -3,6 +3,7 @@ from flask_login import login_user, login_required, current_user
 
 from app import redis_store
 from app.forms.login import LoginForm
+from app.libs.flask_level import level_limit
 from app.libs.flask_libs import randon_code
 from app.libs.redprint import Redprint
 from app.models.user import User
@@ -13,7 +14,8 @@ web = Redprint("login")
 @web.route("/", methods=("GET", "POST"))
 def login():
     if current_user.is_active:
-        return "你已经登陆过了"
+        print("234")
+        return redirect(url_for("web.login+login_success"))
 
     form = LoginForm()
 
@@ -43,7 +45,6 @@ def login():
             flash("账号不存在")
             return redirect(url_for("web.login+login"))
 
-
     code = randon_code()
     redis_store.set(session.get("csrf_token"), code.lower(), ex=current_app.config.get("VERIFICATION_TIMEOUT", 300))
     return render_template("login/login.html", form=form, code=code)
@@ -52,4 +53,17 @@ def login():
 @web.route("/success")
 @login_required
 def login_success():
-    return "登录成功"
+    return render_template("login/success.html")
+
+
+@web.route("/level1")
+@login_required
+@level_limit(level=1)
+def level1():
+    return "这是一个等级为1的路由"
+
+
+@web.route("/limited")
+@login_required
+def limited():
+    return "似乎您的访问权限不足"

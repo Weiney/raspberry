@@ -3,10 +3,11 @@ from sqlalchemy import Column, Integer, String
 from werkzeug.security import generate_password_hash, check_password_hash
 
 from app import login_manager
+from app.libs.flask_level import BaseLevel
 from app.models.base import Base
 
 
-class User(Base, UserMixin):
+class User(Base, UserMixin, BaseLevel):
     id = Column(Integer, primary_key=True)
     username = Column(String(50), nullable=True)
     _password = Column("password", String(128), nullable=True)
