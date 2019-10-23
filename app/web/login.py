@@ -14,7 +14,6 @@ web = Redprint("login")
 @web.route("/", methods=("GET", "POST"))
 def login():
     if current_user.is_active:
-        print("234")
         return redirect(url_for("web.login+login_success"))
 
     form = LoginForm()
