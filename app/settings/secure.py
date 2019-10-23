@@ -1,2 +1,7 @@
-REDIS_URL = "redis://:123456@localhost:6379/0"
 SECRET_KEY = "zTm1Vix7UZZdJIjAqaYJ6cPzFBvBXWLx"
+REDIS_URL = "redis://:123456@localhost:6379/0"
+
+# MySQL相关配置
+SQLALCHEMY_DATABASE_URI = "mysql+cymysql://raspberry:LcZyxFKJbaZf3sDy@192.168.123.191:3306/raspberry?charset=utf8mb4"
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+SQLALCHEMY_COMMIT_TEARDOWN = True
