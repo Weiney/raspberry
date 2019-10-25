@@ -1,3 +1,5 @@
+import logging
+
 from flask import Flask
 from flask_bootstrap import Bootstrap
 from flask_login import LoginManager
@@ -26,6 +28,12 @@ def create_app():
 
 
 def register_extension(app):
+    if app.config.get("DEBUG") == False and app.config.get("ENV") == "production":
+        gunicorn_logger = logging.getLogger('gunicorn.error')
+        app.logger.handlers = gunicorn_logger.handlers
+        app.logger.setLevel(gunicorn_logger.level)
+
+
     Bootstrap(app)
     redis_store.init_app(app, decode_responses=True)
     db.init_app(app)

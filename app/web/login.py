@@ -27,7 +27,6 @@ def login():
         if server_code != form.verification.data.lower():
             flash("验证码错误")
             return redirect(url_for("web.login+login"))
-
         user = User.query.filter_by(username=form.username.data).first()
         if user:
             redis_store.delete(csrf_token)
