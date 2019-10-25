@@ -9,8 +9,13 @@ Python Flask学习
 PS:图形验证码部份未实现,项目中用文本代替,只用作测试功能<br>
 如果需要实现图形验证码请转链接: https://www.weiney.com/2108.html
 
-### Lesson3 实现用户系统,添加接口权限验证
+### Day3 实现用户系统,添加接口权限验证
 使用Flask-Login实现了登录用户的权限验证Flask_Level
 简单的实现了装饰器@limit_level(level=1)保护接口访问
 具体的实现细节请查看文件/app/libs/flask_level.py
 详细介绍访问:https://www.weiney.com/2204.html
+
+### Day4 完善了Flask-Level,增加异常类
+增加了异常信息类PermissionException
+完善了Flask-Level的limited_message的使用场景
+完善了演示页面的信息,演示了七级权限的接口访问

@@ -19,21 +19,29 @@
 
     本扩展只做权限的简单判断,登录处理都是由Flask-Login处理
 
-    当用户权限符合接口权限则执行路由内部相关代码,否则会abort一个403代码
-    你还可以像Flask-Login一样设置一个limited_view
-    这样在出现权限限制的时候会将请求重定向到这个试图当中
+    当用户权限符合接口权限则执行路由内部相关代码,
+    否则会raise一个PermissionException,这个异常就是一个简单封装的HTTPException,错误码为403
+
+    你可以通过error_handler捕获这个异常并加以处理,
+    同时你也可以定义一个limited_message来替换掉原生的description
+
+    你同样还可以像Flask-Login一样设置一个limited_view
+    此时在出现权限限制的时候会将请求重定向到这个试图当中
+
+
 '''
 from functools import wraps
 
-from flask import current_app, redirect, url_for, abort
+from flask import current_app, redirect, url_for
 from flask_login import current_user
 from sqlalchemy import SmallInteger, Column
+from werkzeug.exceptions import HTTPException
 
 
 class FlaskLevel():
     def __init__(self):
         self.limited_view = None
-        self.limited_message = "请求被终止,您无权访问该接口"
+        self.limited_message = None
 
     def init_app(self, app):
         app.limit_level = self
@@ -52,8 +60,16 @@ def level_limit(level=0):
             elif current_app.limit_level.limited_view:
                 return redirect(url_for(current_app.limit_level.limited_view))
             else:
-                abort(403)
+                limited_message = current_app.limit_level.limited_message
+                if limited_message is None:
+                    limited_message = "访问出现了错误,您似乎发送了一个超权限请求,权限等级{},您的权限等级{}".format(
+                        level, current_user.limit_level)
+                raise PermissionException(limited_message)
 
         return wrapper
 
     return decorater
+
+
+class PermissionException(HTTPException):
+    code = 403

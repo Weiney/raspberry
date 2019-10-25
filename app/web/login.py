@@ -55,11 +55,59 @@ def login_success():
     return render_template("login/success.html")
 
 
+@web.route("/level0")
+@login_required
+def level0():
+    return "这是一个等级为0的路由"
+
+
 @web.route("/level1")
 @login_required
 @level_limit(level=1)
 def level1():
     return "这是一个等级为1的路由"
+
+
+@web.route("/level2")
+@login_required
+@level_limit(level=2)
+def level2():
+    return "这是一个等级为2的路由"
+
+
+@web.route("/level3")
+@login_required
+@level_limit(level=3)
+def level3():
+    return "这是一个等级为3的路由"
+
+
+@web.route("/level4")
+@login_required
+@level_limit(level=4)
+def level4():
+    return "这是一个等级为4的路由"
+
+
+@web.route("/level5")
+@login_required
+@level_limit(level=5)
+def level5():
+    return "这是一个等级为5的路由"
+
+
+@web.route("/level6")
+@login_required
+@level_limit(level=6)
+def level6():
+    return "这是一个等级为6的路由"
+
+
+@web.route("/level7")
+@login_required
+@level_limit(level=7)
+def level7():
+    return "这是一个等级为7的路由"
 
 
 @web.route("/limited")

@@ -32,7 +32,7 @@ def register_extension(app):
 
     flask_level = FlaskLevel()
     flask_level.init_app(app)
-    flask_level.limited_view = "web.login+limited"
+    # flask_level.limited_view = "web.login+limited"
 
     login_manager.init_app(app)
     login_manager.login_view = "web.login+login"

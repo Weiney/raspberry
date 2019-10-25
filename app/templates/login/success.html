@@ -12,14 +12,23 @@
         <hr/>
         <h4>用户名:{{ current_user.username }} <span
                 class="badge badge-success">{{ "VIP: " + current_user.limit_level|string }}</span></h4>
-        <hr/>
-        <button class="btn btn-primary">级别权限0</button>
-        <button class="btn btn-secondary">级别权限1</button>
-        <button class="btn btn-light">级别权限2</button>
-        <button class="btn btn-dark">级别权限3</button>
-        <button class="btn btn-success">级别权限4</button>
-        <button class="btn btn-warning">级别权限5</button>
-        <button class="btn btn-dark">级别权限6</button>
+        <div class="alert alert-warning">
+            您好你的等级是{{ current_user.limit_level }}, 你只能访问与你去权限等级相符的接口
+            <button type="button" class="close" data-dismiss="alert">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="btn-group">
+            <button class="btn btn-outline-primary"><a href={{ url_for("web.login+level0") }}>权限级别0</a></button>
+            <button class="btn btn-outline-secondary"><a href={{ url_for("web.login+level1") }}>权限级别1</a></button>
+            <button class="btn btn-outline-dark"><a href={{ url_for("web.login+level2") }}>权限级别2</a></button>
+            <button class="btn btn-outline-success"><a href={{ url_for("web.login+level3") }}>权限级别3</a></button>
+            <button class="btn btn-outline-warning"><a href={{ url_for("web.login+level4") }}>权限级别4</a></button>
+            <button class="btn btn-outline-dark"><a href={{ url_for("web.login+level5") }}>权限级别5</a></button>
+            <button class="btn btn-outline-primary"><a href={{ url_for("web.login+level7") }}>权限级别6</a></button>
+            <button class="btn btn-outline-secondary"><a href={{ url_for("web.login+level7") }}>权限级别7</a></button>
+        </div>
+
     </div>
 </body>
 </html>
