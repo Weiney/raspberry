@@ -1,6 +1,10 @@
 SECRET_KEY = "zTm1Vix7UZZdJIjAqaYJ6cPzFBvBXWLx"
 REDIS_URL = "redis://:123456@localhost:6379/0"
 
+RATELIMIT_STORAGE_URL = "redis://:123456@localhost:6379/0"
+RATELIMIT_HEADERS_ENABLED = True
+RATELIMIT_DEFAULT = "200 per day;50 per hour"
+
 # MySQL相关配置
 SQLALCHEMY_DATABASE_URI = "mysql+cymysql://raspberry:LcZyxFKJbaZf3sDy@192.168.123.191:3306/raspberry?charset=utf8mb4"
 SQLALCHEMY_TRACK_MODIFICATIONS = False

@@ -2,6 +2,8 @@ import logging
 
 from flask import Flask
 from flask_bootstrap import Bootstrap
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
 from flask_login import LoginManager
 from flask_redis import FlaskRedis
 
@@ -10,6 +12,7 @@ from app.models.base import db
 
 redis_store = FlaskRedis()
 login_manager = LoginManager()
+limiter = Limiter(key_func=get_remote_address)
 
 
 def create_app():
@@ -33,7 +36,6 @@ def register_extension(app):
         app.logger.handlers = gunicorn_logger.handlers
         app.logger.setLevel(gunicorn_logger.level)
 
-
     Bootstrap(app)
     redis_store.init_app(app, decode_responses=True)
     db.init_app(app)
@@ -44,6 +46,8 @@ def register_extension(app):
 
     login_manager.init_app(app)
     login_manager.login_view = "web.login+login"
+
+    limiter.init_app(app)
 
 
 def register_blueprint(app):
