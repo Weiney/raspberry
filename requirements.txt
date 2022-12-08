@@ -1,5 +1,5 @@
 Bootstrap-Flask==1.1.0
-certifi==2019.9.11
+certifi==2022.12.7
 Click==7.0
 cymysql==0.9.14
 Flask==1.1.1
